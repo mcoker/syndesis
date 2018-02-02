@@ -12,7 +12,7 @@ metadata:
 # Use docker images: true
 # Without Probes: false
 # Atlasmap Tag: 
-# Syndesis Tag: 1.3.0-20180202
+# Syndesis Tag: 1.3
 # Prometheus Tag: v2.0.0
 # Restricted environment: false
 #
@@ -131,10 +131,10 @@ objects:
     tags:
     - from:
         kind: DockerImage
-        name: ${SYNDESIS_REGISTRY}/syndesis/syndesis-s2i:1.3.0-20180202
+        name: ${SYNDESIS_REGISTRY}/syndesis/syndesis-s2i:1.3
       importPolicy:
         scheduled: true
-      name: "1.3.0-20180202"
+      name: "1.3"
 
 - apiVersion: v1
   kind: Secret
@@ -194,7 +194,7 @@ objects:
       spec:
         containers:
         - name: syndesis-ui
-          image: ${SYNDESIS_REGISTRY}/syndesis/syndesis-ui:1.3.0-20180202
+          image: ${SYNDESIS_REGISTRY}/syndesis/syndesis-ui:1.3
 
           imagePullPolicy: IfNotPresent
           livenessProbe:
@@ -640,7 +640,7 @@ objects:
             value: ${POSTGRESQL_SAMPLEDB_PASSWORD}
           - name: JAVA_DEBUG
             value: "true"
-          image: ${SYNDESIS_REGISTRY}/syndesis/syndesis-rest:1.3.0-20180202
+          image: ${SYNDESIS_REGISTRY}/syndesis/syndesis-rest:1.3
 
           imagePullPolicy: IfNotPresent
           livenessProbe:
@@ -725,7 +725,7 @@ objects:
         apiBaseUrl: ${OPENSHIFT_MASTER}/oapi/v1
         namespace: ${NAMESPACE}
         imageStreamNamespace: ${IMAGE_STREAM_NAMESPACE}
-        builderImageStreamTag: syndesis-s2i:1.3.0-20180202
+        builderImageStreamTag: syndesis-s2i:1.3
         deploymentMemoryRequestMi: 200
         deploymentMemoryLimitMi: 512
         mavenOptions: "-XX:+UseG1GC -XX:+UseStringDeduplication -Xmx310m"
@@ -783,7 +783,7 @@ objects:
             value: "-Djava.net.preferIPv4Stack=true -Duser.home=/tmp"
           - name: JAVA_DEBUG
             value: "true"
-          image: ${SYNDESIS_REGISTRY}/syndesis/syndesis-verifier:1.3.0-20180202
+          image: ${SYNDESIS_REGISTRY}/syndesis/syndesis-verifier:1.3
 
           imagePullPolicy: IfNotPresent
           readinessProbe:
