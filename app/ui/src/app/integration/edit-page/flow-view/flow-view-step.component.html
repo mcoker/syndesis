@@ -14,46 +14,47 @@
   </ng-template>
 
   <ng-template #tooltipPopover>
-    <div>
-      <i class="fa fa-remove pull-right" (click)="hideInfoPopover()"></i>
-
+    <div class="info-popover container-fluid">
+      <div class="row">
+          <i class="fa fa-remove pull-right" (click)="hideInfoPopover()" role="button"></i>
+      </div>
       <!-- TODO Apply UXD outcome - https://github.com/syndesisio/syndesis/issues/700 -->
       <!--
       <div *ngIf="previousStepShouldDefineDataShape"><p style="color:red"><b>Define a data type</b></p></div>
       <div *ngIf="shouldAddDatamapper"><p style="color:red"><b>Add a datamapper step</b></p></div>
       -->
-        <dl class="dl-horizontal">
-          <dt>
-            Name
-          </dt>
-          <dd>
-            {{ step.connection?.name }}
-          </dd>
-        </dl>
-        <dl class="dl-horizontal">
-          <dt>
-            Action
-          </dt>
-          <dd>
-            {{ step.action?.name }}
-          </dd>
-        </dl>
-        <dl class="dl-horizontal" *ngIf="inputDataShapeText">
-          <dt>
-            Input Data Type
-          </dt>
-          <dd>
-            {{ inputDataShapeText }}
-          </dd>
-        </dl>
-        <dl class="dl-horizontal" *ngIf="outputDataShapeText">
-          <dt>
-            Output Data Type
-          </dt>
-          <dd>
-            {{ outputDataShapeText }}
-          </dd>
-        </dl>
+      <dl class="row">
+        <dt class="col-xs-6 text-right">
+          Name
+        </dt>
+        <dd class="col-xs-6">
+          {{ step.connection?.name }}
+        </dd>
+      </dl>
+      <dl class="row">
+        <dt class="col-xs-6 text-right">
+          Action
+        </dt>
+        <dd class="col-xs-6">
+          {{ step.action?.name }}
+        </dd>
+      </dl>
+      <dl class="row" *ngIf="inputDataShapeText">
+        <dt class="col-xs-6 text-right">
+          Input Data Type
+        </dt>
+        <dd class="col-xs-6">
+          {{ inputDataShapeText }}
+        </dd>
+      </dl>
+      <dl class="row" *ngIf="outputDataShapeText">
+        <dt class="col-xs-6 text-right">
+          Output Data Type
+        </dt>
+        <dd class="col-xs-6">
+          {{ outputDataShapeText }}
+        </dd>
+      </dl>
     </div>
   </ng-template>
 
@@ -96,19 +97,19 @@
           </div>  
         
           <div class="step-icons">
-            <!-- Delete Icon -->
-            <i *ngIf="showDelete()"
-              class="fa fa-lg fa-trash pull-right"
-              title="Delete this connection"
-              (click)="deletePrompt(); $event.stopPropagation();"></i>
             <!-- Info icon -->
-            <i class="fa fa-lg fa-info-circle pull-right"
+            <i class="fa fa-lg fa-info-circle"
               [popover]="tooltipPopover"
               #connectionInfoPop="bs-popover"
               placement="right"
               (click)="toggleInfoPopover(); $event.stopPropagation();"
               triggers=""
               container="body"></i>
+            <!-- Delete Icon -->
+            <i *ngIf="showDelete()"
+              class="fa fa-lg fa-trash"
+              title="Delete this connection"
+              (click)="deletePrompt(); $event.stopPropagation();"></i>
           </div>        
         </div>
       </div>
