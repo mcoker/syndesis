@@ -1,38 +1,39 @@
 <syndesis-modal [title]="modalTitle" [message]="modalMessage">
 </syndesis-modal>
 <syndesis-loading [loading]="loading">
-  <div *ngIf="integration" class="integration-detail syn-scrollable">
+  <div *ngIf="integration" class="integration-detail syn-scrollable row">
     <div class="toolbar syn-toolbar--inverted">
-      <div class="row toolbar-pf">
-        <div class="col-sm-12">
-          <div class="toolbar-pf-actions">
-            <div class="inline-block">
-              <ol class="breadcrumb">
-                <li>
-                  <a [routerLink]="['/']">Home</a>
-                </li>
-                <li>
-                  <a [routerLink]="['/integrations']">Integrations</a>
-                </li>
-                <li class="active">
-                  <strong>Integration Summary</strong>
-                </li>
-              </ol>
-            </div>
-            <div class="toolbar-pf-action-right">
-              <syndesis-integration-action-menu [integration]="integration" [showPrimaryActions]="true" [showViewAction]="false">
-              </syndesis-integration-action-menu>
+      <div class="container-fluid">
+        <div class="row toolbar-pf">
+          <div class="col-sm-12">
+            <div class="toolbar-pf-actions">
+              <div class="inline-block">
+                <ol class="breadcrumb">
+                  <li>
+                    <a [routerLink]="['/']">Home</a>
+                  </li>
+                  <li>
+                    <a [routerLink]="['/integrations']">Integrations</a>
+                  </li>
+                  <li class="active">
+                    <strong>Integration Summary</strong>
+                  </li>
+                </ol>
+              </div>
+              <div class="toolbar-pf-action-right">
+                <syndesis-integration-action-menu [integration]="integration" [showPrimaryActions]="true" [showViewAction]="false">
+                </syndesis-integration-action-menu>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="integration-detail__info">
+    <div class="syn-scrollable--body syn-scrollable">
+      <div class="col-xs-12 integration-detail__info">
         <h1 class="inline-block">
           <syndesis-editable-text [value]="integration.name" [validationFn]="validateName" (onSave)="attributeUpdated('name', $event, integration)"></syndesis-editable-text>
         </h1>
-
         <ng-container [ngSwitch]="integration.currentState">
           <ng-container *ngSwitchCase="'Pending'">
             <div class="spinner spinner-sm spinner-inline"></div> Publishing...
@@ -83,29 +84,31 @@
         </li>
       </ul>
 
-      <div class="integration-detail__outlet" [hidden]="selectedTabType !== 'description'">
-        <syndesis-integration-description
-          [integration]="integration"
-          [stepStore]="stepStore"
-          (viewDetails)="viewDetails($event)"
-          (attributeUpdated)="attributeUpdated($event)"
-          (draftAction)="draftAction($event)">
-        </syndesis-integration-description>
-      </div>
+      <div class="integration-detail__outlet syn-scrollable--body">      
+        <div [hidden]="selectedTabType !== 'description'">
+          <syndesis-integration-description
+            [integration]="integration"
+            [stepStore]="stepStore"
+            (viewDetails)="viewDetails($event)"
+            (attributeUpdated)="attributeUpdated($event)"
+            (draftAction)="draftAction($event)">
+          </syndesis-integration-description>
+        </div>
 
-      <div class="integration-detail__outlet" [hidden]="selectedTabType !== 'logs'">
-        <syndesis-integration-logs [integration]=integration></syndesis-integration-logs>
-      </div>
-      
-      <div class="integration-detail__outlet" [hidden]="selectedTabType !== 'activity'">
-        <syndesis-integration-activity [integration]=integration></syndesis-integration-activity>
-      </div>
-      
-      <div class="integration-detail__outlet" [hidden]="selectedTabType !== 'metrics'">
-        <syndesis-integration-metrics
-          [integration]=integration
-          [integrationMetrics]="integrationMetrics$ | async">
-        </syndesis-integration-metrics>
+        <div [hidden]="selectedTabType !== 'logs'">
+          <syndesis-integration-logs [integration]=integration></syndesis-integration-logs>
+        </div>
+        
+        <div [hidden]="selectedTabType !== 'activity'">
+          <syndesis-integration-activity [integration]=integration></syndesis-integration-activity>
+        </div>
+        
+        <div [hidden]="selectedTabType !== 'metrics'">
+          <syndesis-integration-metrics
+            [integration]=integration
+            [integrationMetrics]="integrationMetrics$ | async">
+          </syndesis-integration-metrics>
+        </div>
       </div>
     </div>
   </div>
