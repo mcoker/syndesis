@@ -20,12 +20,16 @@
             <input #fileSelect
                    type="file"
                    ng2FileSelect
-                   [uploader]="uploader">
+                   [uploader]="uploader"
+                   (onFileSelected)="fileSelect.value=''">
           </div>
           <div class="col-md-9">
             <div *ngFor="let item of uploader.queue">
               <div class="row">
-                <div class="col-xs-10">
+                <div class="col-xs-7">
+                    {{ item?.file?.name }}
+                </div>
+                <div class="col-xs-5">
                   <div *ngIf="item.isUploading" class="text-muted">
                     <span *ngIf="item.isUploading" class="spinner spinner-sm spinner-inline"></span>
                     <em>Importing...</em>

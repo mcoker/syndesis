@@ -84,7 +84,6 @@ export class IntegrationImportComponent implements OnInit, OnDestroy {
     this.uploader.onWhenAddingFileFailed = (item: FileLikeObject, filter: any, options: any): any => {
       this.error = this.getFileTypeError();
       this.fileSelect.nativeElement['value'] = '';
-      this.uploader.clearQueue();
     };
 
     this.uploader.onCompleteItem = (item: FileItem,
