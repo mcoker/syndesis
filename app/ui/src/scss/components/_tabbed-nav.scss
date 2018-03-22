@@ -1,9 +1,8 @@
 /// Provides general styles for generic tabbed top nav bar components.
 .syn-tabs {
   flex: 0 0 auto;
-  padding-left: $top-nav-gutter;
-  padding-right: $top-nav-gutter;
-  background: inherit;
+  padding: ($gutter / 2) $top-nav-gutter 0;
+  border-color: #d1d1d1;
 
   &__tab {
     min-width: 200px;
