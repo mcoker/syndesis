@@ -12,7 +12,10 @@ import { ApiModule } from '@syndesis/ui/api';
 import { apiConnectorEndpoints } from './api-connector.api';
 import { ApiConnectorRoutingModule } from './api-connector.routing';
 
-import { ApiConnectorAuthComponent, ApiConnectorSwaggerUploadComponent } from './api-connector-create';
+import {
+  ApiConnectorAuthComponent,
+  ApiConnectorSwaggerUploadComponent
+} from './api-connector-create';
 import { ApiConnectorInfoComponent } from './api-connector-info';
 import { ApiConnectorReviewComponent } from './api-connector-review';
 import { ApiConnectorListComponent } from './api-connector-list';
@@ -34,9 +37,13 @@ import { ApicurioEditorModule, ApicurioCommonComponentsModule } from 'apicurio-d
     ApiConnectorRoutingModule,
     ApiModule.forChild(apiConnectorEndpoints),
     StoreModule.forFeature('apiConnectorState', apiConnectorReducer),
+<<<<<<< HEAD
     EffectsModule.forFeature([ApiConnectorEffects]),
     ApicurioEditorModule,
     ApicurioCommonComponentsModule
+=======
+    EffectsModule.forFeature([ApiConnectorEffects])
+>>>>>>> chore(deps): upgrade angular core and rxjs
   ],
   exports: [RouterModule],
   declarations: [
@@ -45,8 +52,8 @@ import { ApicurioEditorModule, ApicurioCommonComponentsModule } from 'apicurio-d
     ApiConnectorAuthComponent,
     ApiConnectorSwaggerUploadComponent,
     ApiConnectorInfoComponent,
-    ApiConnectorReviewComponent,
+    ApiConnectorReviewComponent
   ],
   providers: [ApiConnectorService]
 })
-export class ApiConnectorModule { }
+export class ApiConnectorModule {}
