@@ -37,9 +37,19 @@ import { ApicurioEditorModule, ApicurioCommonComponentsModule } from 'apicurio-d
     ApiConnectorRoutingModule,
     ApiModule.forChild(apiConnectorEndpoints),
     StoreModule.forFeature('apiConnectorState', apiConnectorReducer),
+<<<<<<< HEAD
     EffectsModule.forFeature([ApiConnectorEffects]),
     ApicurioEditorModule,
     ApicurioCommonComponentsModule
+=======
+<<<<<<< HEAD
+    EffectsModule.forFeature([ApiConnectorEffects])
+=======
+    EffectsModule.forFeature([ApiConnectorEffects]),
+    ApicurioEditorModule,
+    ApicurioCommonComponentsModule
+>>>>>>> Add Apicurio references to ApiConnectorModule
+>>>>>>> Add Apicurio references to ApiConnectorModule
   ],
   exports: [RouterModule],
   declarations: [
