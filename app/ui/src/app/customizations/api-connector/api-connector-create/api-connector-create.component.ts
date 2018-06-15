@@ -127,6 +127,14 @@ export class ApiConnectorCreateComponent implements OnInit, OnDestroy {
   }
 >>>>>>> Add temporary API definition in constructor
 
+<<<<<<< HEAD
+=======
+
+  public apiDefinition(): ApiDefinition {
+    return this.apiDef;
+  }
+
+>>>>>>> Add fnx to ApiConnectorCreateComponent
   public onUserSelection(selection: string): void {
     console.log('User selection changed: ', selection);
   }
