@@ -112,6 +112,19 @@ export class ApiConnectorCreateComponent implements OnInit, OnDestroy {
     };
   }
 
+
+  public apiDefinition(): ApiDefinition {
+    return this.apiDef;
+  }
+
+  public onUserSelection(selection: string): void {
+    console.log('User selection changed: ', selection);
+  }
+
+  public onUserChange(command: OtCommand): void {
+    console.log('Something happened! ' + JSON.stringify(command));
+  }
+
   ngOnInit() {
     this.modalService.registerModal(this.cancelModalId, this.cancelModalTemplate);
     this.apiConnectorState$ = this.apiConnectorStore.select(getApiConnectorState);
