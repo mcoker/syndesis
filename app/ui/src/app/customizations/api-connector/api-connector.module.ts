@@ -21,6 +21,8 @@ import { apiConnectorReducer } from './api-connector.reducer';
 import { ApiConnectorEffects } from './api-connector.effects';
 import { ApiConnectorService } from './api-connector.service';
 
+import { ApicurioEditorModule, ApicurioCommonComponentsModule } from 'apicurio-design-studio';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -33,6 +35,8 @@ import { ApiConnectorService } from './api-connector.service';
     ApiModule.forChild(apiConnectorEndpoints),
     StoreModule.forFeature('apiConnectorState', apiConnectorReducer),
     EffectsModule.forFeature([ApiConnectorEffects]),
+    ApicurioEditorModule,
+    ApicurioCommonComponentsModule
   ],
   exports: [RouterModule],
   declarations: [
