@@ -38,7 +38,10 @@ enum WizardSteps {
 export class ApiConnectorCreateComponent implements OnInit, OnDestroy {
   currentActiveStep = 1;
   apiConnectorState$: Observable<ApiConnectorState>;
+<<<<<<< HEAD
   displayDefinitionEditor = false;
+=======
+>>>>>>> Add temporary API definition in constructor
 
   @ViewChild('_apiEditor') _apiEditor: ApiEditorComponent;
   apiDef: ApiDefinition;
@@ -51,7 +54,78 @@ export class ApiConnectorCreateComponent implements OnInit, OnDestroy {
     private router: Router,
     private modalService: ModalService,
     private apiConnectorStore: Store<ApiConnectorStore>
+<<<<<<< HEAD
   ) {}
+=======
+  ) {
+    this.apiDef = new ApiDefinition();
+    this.apiDef.createdBy = 'user1';
+    this.apiDef.createdOn = new Date();
+    this.apiDef.tags = [];
+    this.apiDef.description = '';
+    this.apiDef.id = 'api-1';
+    this.apiDef.spec = {
+      'openapi': '3.0.0',
+      'info': {
+        'title': 'Simple OAI 3.0.0 API',
+        'description': 'A simple API using OpenAPI 3.0.0.',
+        'contact': {
+          'name': 'Example Org',
+          'url': 'http://www.example.org',
+          'email': 'contact@example.org'
+        },
+        'license': {
+          'name': 'Apache 2.0',
+          'url': 'https://www.apache.org/licenses/LICENSE-2.0'
+        },
+        'version': '2.0.11'
+      },
+      'paths': {
+      },
+      'components': {
+        'schemas': {
+          'Address': {
+            'properties': {
+              'name': {},
+              'street': {},
+              'city': {},
+              'state': {},
+              'zip': {}
+            }
+          },
+          'User': {
+            'properties': {
+              'address': {
+                '$ref': '#/components/schemas/Address'
+              }
+            }
+          }
+        },
+        'securitySchemes': {
+          'Basic': {
+            'type': 'http',
+            'description': 'Basic auth.',
+            'scheme': 'Basic'
+          }
+        }
+      },
+      'tags': [
+        {
+          'name': 'foo',
+          'description': 'The Foo tag.'
+        },
+        {
+          'name': 'bar',
+          'description': 'The bar tag.'
+        },
+        {
+          'name': 'baz',
+          'description': 'The baz tag.\n'
+        }
+      ]
+    };
+  }
+>>>>>>> Add temporary API definition in constructor
 
   public onUserSelection(selection: string): void {
     console.log('User selection changed: ', selection);
