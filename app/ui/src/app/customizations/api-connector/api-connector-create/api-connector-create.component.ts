@@ -38,10 +38,7 @@ enum WizardSteps {
 export class ApiConnectorCreateComponent implements OnInit, OnDestroy {
   currentActiveStep = 1;
   apiConnectorState$: Observable<ApiConnectorState>;
-<<<<<<< HEAD
   displayDefinitionEditor = false;
-=======
->>>>>>> Add temporary API definition in constructor
 
   @ViewChild('_apiEditor') _apiEditor: ApiEditorComponent;
   apiDef: ApiDefinition;
@@ -54,87 +51,26 @@ export class ApiConnectorCreateComponent implements OnInit, OnDestroy {
     private router: Router,
     private modalService: ModalService,
     private apiConnectorStore: Store<ApiConnectorStore>
-<<<<<<< HEAD
   ) {}
-=======
-  ) {
-    this.apiDef = new ApiDefinition();
-    this.apiDef.createdBy = 'user1';
-    this.apiDef.createdOn = new Date();
-    this.apiDef.tags = [];
-    this.apiDef.description = '';
-    this.apiDef.id = 'api-1';
-    this.apiDef.spec = {
-      'openapi': '3.0.0',
-      'info': {
-        'title': 'Simple OAI 3.0.0 API',
-        'description': 'A simple API using OpenAPI 3.0.0.',
-        'contact': {
-          'name': 'Example Org',
-          'url': 'http://www.example.org',
-          'email': 'contact@example.org'
-        },
-        'license': {
-          'name': 'Apache 2.0',
-          'url': 'https://www.apache.org/licenses/LICENSE-2.0'
-        },
-        'version': '2.0.11'
-      },
-      'paths': {
-      },
-      'components': {
-        'schemas': {
-          'Address': {
-            'properties': {
-              'name': {},
-              'street': {},
-              'city': {},
-              'state': {},
-              'zip': {}
-            }
-          },
-          'User': {
-            'properties': {
-              'address': {
-                '$ref': '#/components/schemas/Address'
-              }
-            }
-          }
-        },
-        'securitySchemes': {
-          'Basic': {
-            'type': 'http',
-            'description': 'Basic auth.',
-            'scheme': 'Basic'
-          }
-        }
-      },
-      'tags': [
-        {
-          'name': 'foo',
-          'description': 'The Foo tag.'
-        },
-        {
-          'name': 'bar',
-          'description': 'The bar tag.'
-        },
-        {
-          'name': 'baz',
-          'description': 'The baz tag.\n'
-        }
-      ]
-    };
-  }
->>>>>>> Add temporary API definition in constructor
 
-<<<<<<< HEAD
-=======
+  public apiDefinition(spec): ApiDefinition {
+    // Check to see if it's a URL or a file first..
+    console.log('spec: ' + JSON.stringify(spec));
+    if(spec && spec.configuredProperties && spec.configuredProperties.specification) {
+      // File URL
+      console.log('User has specified a file URL.');
+    } else if(spec && spec.configuredProperties && spec.configuredProperties.specificationFile) {
+      // Entire file uploaded
+      console.log('User has uploaded a file.');
+      this.apiDef.spec = spec;
+      console.log('this.apiDef: ' + JSON.stringify(this.apiDef));
+      return this.apiDef;
+    }
+    //this.apiConnectorState$.map(apiConnectorState => apiConnectorState.createRequest);
 
-  public apiDefinition(): ApiDefinition {
     return this.apiDef;
   }
 
->>>>>>> Add fnx to ApiConnectorCreateComponent
   public onUserSelection(selection: string): void {
     console.log('User selection changed: ', selection);
   }
@@ -143,13 +79,10 @@ export class ApiConnectorCreateComponent implements OnInit, OnDestroy {
     console.log('Something happened! ' + JSON.stringify(command));
   }
 
-<<<<<<< HEAD
   public showDefinitionEditor(): boolean {
     return true;
   }
 
-=======
->>>>>>> Pass param via EventEmitter to determine whether or not ot hide or show the definition editor
   ngOnInit() {
     this.modalService.registerModal(
       this.cancelModalId,
@@ -204,32 +137,14 @@ export class ApiConnectorCreateComponent implements OnInit, OnDestroy {
   }
 
   onReviewComplete({event: event, displayEditor: displayEditor}): void {
-<<<<<<< HEAD
-    // Check if request is to show editor or not
-    if (displayEditor === true) {
-      this.displayDefinitionEditor = true;
-
-    } else {
-      this.displayDefinitionEditor = false;
-      this.currentActiveStep = WizardSteps.UpdateAuthSettings;
-    }
-=======
-    console.log('displayEditor: ' + JSON.stringify(displayEditor));
-
     // Check if request is to show editor or not
     if(displayEditor === true) {
       this.displayDefinitionEditor = true;
-      console.log('User wants to display editor...');
-      console.log('this.displayDefinitionEditor: ' + JSON.stringify(this.displayDefinitionEditor));
+
     } else {
       this.displayDefinitionEditor = false;
       this.currentActiveStep = WizardSteps.UpdateAuthSettings;
-      console.log('User does not want to display editor...');
-      console.log('this.displayDefinitionEditor: ' + JSON.stringify(this.displayDefinitionEditor));
     }
-
-    console.log('this.displayDefinitionEditor: ' + JSON.stringify(this.displayDefinitionEditor));
->>>>>>> Pass param via EventEmitter to determine whether or not ot hide or show the definition editor
   }
 
   onAuthSetup(authSettings: CustomApiConnectorAuthSettings): void {

@@ -58,16 +58,8 @@
         </syndesis-api-connector-info>
       </div>
     </div>
-<<<<<<< HEAD
 
-<<<<<<< HEAD
     <div class="row row-cards-pf apicurio" *ngIf="currentActiveStep == 2 && displayDefinitionEditor === true">
-=======
-    <div class="row row-cards-pf" *ngIf="currentActiveStep == 2">
->>>>>>> Display editor only on submitting step 2
-=======
-    <div class="row row-cards-pf" *ngIf="currentActiveStep == 2 && displayDefinitionEditor === true">
->>>>>>> Pass param via EventEmitter to determine whether or not ot hide or show the definition editor
       <div class="card-pf">
         <div class="card-pf-heading">
           <h2 class="card-pf-title">
@@ -76,7 +68,7 @@
         </div>
         <div class="card-pf-body">
           <api-editor #apiEditor
-                      [api]="apiDef"
+                      [api]="apiDefinition((apiConnectorState$ | async)?.createRequest)"
                       [embedded]="true"
                       (onCommandExecuted)="onUserChange($event)"
                       (onSelectionChanged)="onUserSelection($event)"></api-editor>
