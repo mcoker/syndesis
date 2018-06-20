@@ -143,10 +143,13 @@ export class ApiConnectorCreateComponent implements OnInit, OnDestroy {
     console.log('Something happened! ' + JSON.stringify(command));
   }
 
+<<<<<<< HEAD
   public showDefinitionEditor(): boolean {
     return true;
   }
 
+=======
+>>>>>>> Pass param via EventEmitter to determine whether or not ot hide or show the definition editor
   ngOnInit() {
     this.modalService.registerModal(
       this.cancelModalId,
@@ -201,6 +204,7 @@ export class ApiConnectorCreateComponent implements OnInit, OnDestroy {
   }
 
   onReviewComplete({event: event, displayEditor: displayEditor}): void {
+<<<<<<< HEAD
     // Check if request is to show editor or not
     if (displayEditor === true) {
       this.displayDefinitionEditor = true;
@@ -209,6 +213,23 @@ export class ApiConnectorCreateComponent implements OnInit, OnDestroy {
       this.displayDefinitionEditor = false;
       this.currentActiveStep = WizardSteps.UpdateAuthSettings;
     }
+=======
+    console.log('displayEditor: ' + JSON.stringify(displayEditor));
+
+    // Check if request is to show editor or not
+    if(displayEditor === true) {
+      this.displayDefinitionEditor = true;
+      console.log('User wants to display editor...');
+      console.log('this.displayDefinitionEditor: ' + JSON.stringify(this.displayDefinitionEditor));
+    } else {
+      this.displayDefinitionEditor = false;
+      this.currentActiveStep = WizardSteps.UpdateAuthSettings;
+      console.log('User does not want to display editor...');
+      console.log('this.displayDefinitionEditor: ' + JSON.stringify(this.displayDefinitionEditor));
+    }
+
+    console.log('this.displayDefinitionEditor: ' + JSON.stringify(this.displayDefinitionEditor));
+>>>>>>> Pass param via EventEmitter to determine whether or not ot hide or show the definition editor
   }
 
   onAuthSetup(authSettings: CustomApiConnectorAuthSettings): void {
