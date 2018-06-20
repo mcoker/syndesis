@@ -165,9 +165,12 @@ export class ApiConnectorCreateComponent implements OnInit, OnDestroy {
       this.displayDefinitionEditor = true;
       console.log('User wants to display editor...');
       console.log('this.displayDefinitionEditor: ' + JSON.stringify(this.displayDefinitionEditor));
+
     } else {
       this.displayDefinitionEditor = false;
+
       this.currentActiveStep = WizardSteps.UpdateAuthSettings;
+
       console.log('User does not want to display editor...');
       console.log('this.displayDefinitionEditor: ' + JSON.stringify(this.displayDefinitionEditor));
     }
