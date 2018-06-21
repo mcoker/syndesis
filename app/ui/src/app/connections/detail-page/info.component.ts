@@ -10,11 +10,14 @@ import { ConnectionConfigurationService } from '../common/configuration/configur
 @Component({
   selector: 'syndesis-connection-detail-info',
   template: `
-    <h1 class="syn-connection-detail-info__header">
-      <img [src]="connection | synIconPath">
-      <syndesis-editable-text [value]="connection.name"
-                              [validationFn]="validateName"
-                              (onSave)="onAttributeUpdated('name', $event)"></syndesis-editable-text>
+    <h1 class="syn-connection-detail-info__header row vertical-align">
+      <div class="col-xs-12">
+        <img [src]="connection | synIconPath" class="syn-connection-detail-info__image">
+        <syndesis-editable-text [value]="connection.name"
+                                [validationFn]="validateName"
+                                (onSave)="onAttributeUpdated('name', $event)"
+                                class="col-xs-11"></syndesis-editable-text>
+      </div>
     </h1>
     <div class="row syn-connection-detail-info__description">
       <div class="col-sm-2">

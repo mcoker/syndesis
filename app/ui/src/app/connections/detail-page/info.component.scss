@@ -1,15 +1,15 @@
 @import 'syndesis-sass';
 
 :host {
-  .syn-connection-detail-info__header,
-  .syn-connection-detail-info__description {
-    margin-bottom: $gutter;  
-  }
+  .syn-connection-detail-info {
+    &__header,
+    &__description {
+      margin-bottom: $gutter;
+    }
 
-  .syn-connection-detail-info__header {
-    img {
+    &__image {
       width: 46px;
-      margin-right: $gutter;      
+      margin-right: $gutter;
     }
   }
 }
