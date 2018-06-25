@@ -63,6 +63,8 @@
     "oai-ts-core": "^0.2.15",
     "ngx-bootstrap": "^3.0.0",
     "ngx-chips": "^1.9.2",
+    "oai-ts-commands": "^0.2.28",
+    "oai-ts-core": "^0.2.15",
     "patternfly": "3.51.2",
     "patternfly-ng": "^4.0.0",
     "pluralize": "5.0.0",
@@ -72,12 +74,18 @@
     "typescript-logging": "0.4.0",
     "url": "^0.11.0",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "yamljs": "^0.3.0",
     "zone.js": "^0.8.26"
 =======
     "zone.js": "^0.8.26",
     "snyk": "^1.85.0"
 >>>>>>> fix: app/ui/.snyk & app/ui/package.json to reduce vulnerabilities
+=======
+    "snyk": "^1.85.0",
+    "yamljs": "^0.3.0",
+    "zone.js": "^0.8.26"
+>>>>>>> Res merge conflicts in package.json
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.6.6",
