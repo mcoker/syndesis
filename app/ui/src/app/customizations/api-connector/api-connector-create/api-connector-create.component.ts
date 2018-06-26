@@ -53,27 +53,6 @@ export class ApiConnectorCreateComponent implements OnInit, OnDestroy {
     private apiConnectorStore: Store<ApiConnectorStore>
   ) {}
 
-  public apiDefinition(spec): ApiDefinition {
-    // Check to see if it's a URL or a file first..
-    //console.log('spec: ' + JSON.stringify(spec));
-    if(spec && spec.configuredProperties && spec.configuredProperties.specification) {
-      // File URL
-      //console.log('User has specified a file URL.');
-      //this.apiDef.spec = spec;
-      //console.log('this.apiDef: ' + JSON.stringify(this.apiDef));
-      return this.apiDef;
-    } else if(spec && spec.configuredProperties && spec.configuredProperties.specificationFile) {
-      // Entire file uploaded
-      //console.log('User has uploaded a file.');
-      this.apiDef.spec = spec;
-      //console.log('this.apiDef: ' + JSON.stringify(this.apiDef));
-      return this.apiDef;
-    }
-    //this.apiConnectorState$.map(apiConnectorState => apiConnectorState.createRequest);
-
-    return this.apiDef;
-  }
-
   public onUserSelection(selection: string): void {
     console.log('User selection changed: ', selection);
   }
@@ -141,7 +120,7 @@ export class ApiConnectorCreateComponent implements OnInit, OnDestroy {
 
   onReviewComplete({event: event, displayEditor: displayEditor}): void {
     // Check if request is to show editor or not
-    if(displayEditor === true) {
+    if (displayEditor === true) {
       this.displayDefinitionEditor = true;
 
     } else {
