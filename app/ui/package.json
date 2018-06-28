@@ -37,8 +37,12 @@
     "@angular/platform-browser": "^5.2.0",
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
+<<<<<<< HEAD
     "apicurio-design-studio": "^0.2.11-3",
     "@atlasmap/atlasmap-data-mapper": "1.35.0",
+=======
+    "@atlasmap/atlasmap-data-mapper": "1.35.4",
+>>>>>>> chore: Update to AtlasMap 1.35.4
     "@ng-dynamic-forms/core": "^5.4.6",
     "@ngrx/effects": "^4.1.1",
     "@ngrx/store": "^4.1.1",
