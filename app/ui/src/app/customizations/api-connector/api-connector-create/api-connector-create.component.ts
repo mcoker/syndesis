@@ -88,8 +88,10 @@ export class ApiConnectorCreateComponent implements OnInit, OnDestroy {
           this.apiDef.description = '';
           this.apiDef.id = 'api-1';
           this.apiDef.spec = reader.result;
+          console.log('this.apiDef: ' + this.apiDef);
           this.currentActiveStep = WizardSteps.ReviewApiConnector;
         };
+        //console.log('reader.readAsText(apiConnectorState.specificationFile): ' + JSON.stringify(reader.readAsText(apiConnectorState.specificationFile)));
         reader.readAsText(apiConnectorState.specificationFile);
       });
 
