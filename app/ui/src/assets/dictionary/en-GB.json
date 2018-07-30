@@ -15,11 +15,23 @@
         "delete-extension-modal-lead": "Are you sure you want to delete the \"{{0}}\" extension?"
       },
       "api-client-connectors": {
+        "api-client-connector": "API Client Connector",
+        "api-client-connectors": "{{api-client-connector}}s",
         "delete-connector-modal": "Deleting a connector deletes all connections that were created from that connector but does not affect a running integration that uses one of those connections.",
         "delete-connector-modal-title": "Confirm Delete?",
         "delete-connector-modal-lead": "Are you sure you want to delete the \"{{0}}\" connector?",
+        "edit-api-definition": "Edit API Definition",
+        "edit-specific-api-definition": "Edit {{0}}",
+        "editor-back-button-tooltip": "Go back to API connector wizard",
+        "editor-save-button-tooltip": "Save changes to the API and close editor",
         "cancel-connector-modal": "You have not completed the Create API Connector process. If you cancel now you will lose data you already entered. Do you still want to cancel?",
-        "cancel-connector-modal-lead": "Do you really want to cancel?"
+        "cancel-connector-modal-lead": "Do you really want to cancel?",
+        "cancel-api-editor-modal": "You have made changes to the API. If you cancel now you will lose those changes. Do you still want to cancel?",
+        "cancel-api-editor-modal-lead": "Do you really want to cancel?",
+        "create-upload-spec-step-title": "Upload OpenAPI Specification",
+        "create-review-step-title": "Review Actions",
+        "create-security-step-title": "Specify Security",
+        "create-details-step-title": "Review/Edit Connector Details"
       }
     },
     "integrations": {
@@ -113,7 +125,7 @@
       "home": "{{home}}",
       "integrations": "{{integrations}}",
       "connections": "{{connections}}",
-      "customizations": "Customizations",
+      "customizations": "{{customizations}}",
       "settings": "Settings"
     },
     "links": {
@@ -239,6 +251,7 @@
       "connection-name": "{{Connection}} Name",
       "connections": "{{connection}}s",
       "configuration-required": "Configuration Required",
+      "customizations": "Customizations",
       "step": "Step",
       "steps": "{{step}}s",
       "connector": "Connector",
