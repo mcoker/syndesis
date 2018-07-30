@@ -59,20 +59,24 @@
           </syndesis-api-connector-info>
         </div>
 
-        <div class="row row-cards-pf apicurio" *ngIf="showApiEditor">
-          <div class="card-pf">
-            <div class="card-pf-heading">
-              <a class="pull-left"
-                 [tooltip]="'customizations.api-client-connectors.editor-back-button-tooltip' | synI18n"
-                 (click)="showCancelApiEditorModal()">
-                <<{{ 'shared.back' | synI18n }}
-              </a>
-              <div class="wizard-nav__buttons toolbar-pf-action-right">
-                <button class="wizard-nav__button btn btn-default"
+        <div class="api-connector-editor syn-scrollable" *ngIf="showApiEditor">
+          <div class="toolbar-pf">
+            <div class="toolbar-pf-actions api-connector-editor__header">
+              <div class="api-connector-editor__title">
+                <a [tooltip]="'customizations.api-client-connectors.editor-back-button-tooltip' | synI18n"
+                    (click)="showCancelApiEditorModal()">
+                  &lt; {{ 'shared.back' | synI18n }}
+                </a>
+                <h2>
+                  {{ apiSpecTitle }}
+                </h2>
+              </div>
+              <div class="api-connector-editor__actions toolbar-pf-action-right">
+                <button class="btn btn-default"
                         (click)="showCancelApiEditorModal()">
                   {{ 'shared.cancel' | synI18n }}
                 </button>
-                <button class="wizard-nav__button btn btn-primary"
+                <button class="btn btn-primary"
                         *ngIf="currentActiveStep === 2 && displayDefinitionEditor === true"
                         [disabled]="!editorHasChanges"
                         [tooltip]="'customizations.api-client-connectors.editor-save-button-tooltip' | synI18n"
@@ -80,21 +84,17 @@
                   {{ 'shared.save' | synI18n }}
                 </button>
               </div>
-              <h2 class="card-pf-title">
-                {{ apiSpecTitle }}
-              </h2>
             </div>
-            <div class="card-pf-body">
-              <api-editor #_apiEditor
-                          [api]="apiDef"
-                          [embedded]="true"
-                          (onCommandExecuted)="onUserChange($event)">
-              </api-editor>
-            </div>
+          </div>
+          <div class="api-connector-editor__body syn-scrollable--body">
+            <api-editor #_apiEditor
+                        [api]="apiDef"
+                        [embedded]="true"
+                        (onCommandExecuted)="onUserChange($event)">
+            </api-editor>
           </div>
         </div>
       </div>
-
     </section>
   </div>
 </article>
