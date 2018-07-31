@@ -63,10 +63,11 @@
           <div class="toolbar-pf">
             <div class="toolbar-pf-actions api-connector-editor__header">
               <div class="api-connector-editor__title">
-                <a [tooltip]="'customizations.api-client-connectors.editor-back-button-tooltip' | synI18n"
+                <button class="btn btn-link"
+                    [tooltip]="'customizations.api-client-connectors.editor-back-button-tooltip' | synI18n"
                     (click)="showCancelApiEditorModal()">
                   &lt; {{ 'shared.back' | synI18n }}
-                </a>
+                </button>
                 <h2>
                   {{ apiSpecTitle }}
                 </h2>
