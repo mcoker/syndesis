@@ -19,15 +19,16 @@ import {
   FileLikeObject,
   FileUploader,
   FileUploaderOptions,
-  CodeMirror,
   Mustache
 } from '@syndesis/ui/vendor';
+import { MustacheMode } from './mustache-mode';
 
 @Component({
   selector: 'syndesis-templater',
   templateUrl: './templater.component.html',
   encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./templater.component.scss']
+  styleUrls: ['./templater.component.scss'],
+  providers: [MustacheMode]
 })
 export class TemplaterComponent implements OnInit {
 
@@ -55,7 +56,7 @@ export class TemplaterComponent implements OnInit {
   invalidFileMsg: string;
   uploader: FileUploader;
   editorFocused: boolean;
-  validationErrors: string[] = [];
+  validationErrors: any[] = [];
   validationErrorsExpanded: boolean = false;
 
   /*
@@ -68,13 +69,15 @@ export class TemplaterComponent implements OnInit {
     readOnly: false,
     styleActiveLine: true,
     tabSize: 2,
-    showCursorWhenSelecting: true
+    showCursorWhenSelecting: true,
+    gutters: ["CodeMirror-lint-markers"],
+    lint: true
   };
 
   private outShapeSpec: any;
 
   constructor(private i18NService: I18NService, public currentFlowService: CurrentFlowService,
-              public integrationSupportService: IntegrationSupportService) {}
+              public integrationSupportService: IntegrationSupportService, private mustacheMode: MustacheMode) {}
 
   ngOnInit() {
     //
@@ -109,8 +112,6 @@ export class TemplaterComponent implements OnInit {
   }
 
   onChange() {
-    this.validationErrors = [];
-
     if (this.templateContent) {
       this.valid = true;
     } else {
@@ -129,7 +130,7 @@ export class TemplaterComponent implements OnInit {
       symbols = this.extractTemplateSymbols();
 
     } catch (exception) {
-      this.validationErrors.push(exception.message);
+      this.validationErrors.push({message: exception.message});
     }
 
     this.valid = this.validationErrors.length === 0;
@@ -192,8 +193,6 @@ export class TemplaterComponent implements OnInit {
 
   expandCollapseValidDetail() {
     this.validationErrorsExpanded = !this.validationErrorsExpanded;
-
-
   }
 
   private initUploader() {
@@ -226,8 +225,6 @@ export class TemplaterComponent implements OnInit {
       const reader = new FileReader();
       reader.onload = () => {
         this.templateContent = reader.result;
-        this.onChange();
-        console.log("template content: " + this.templateContent);
       };
 
       reader.readAsText(fileToUpload);
@@ -244,7 +241,7 @@ export class TemplaterComponent implements OnInit {
 
   private initCodeMirror() {
     /**
-     * Defines an overlay mode for mustache,
+     * Defines mode for mustache,
      * which does not yet have its own mode
      * defined in CodeMirror
      *
@@ -253,115 +250,22 @@ export class TemplaterComponent implements OnInit {
      * moved to a service. Probably when this is revisited
      * with adding both the framewaker and velocity support.
      */
-    CodeMirror.defineMode('mustache', function(config, parserConfig) {
-      const mustacheOverlay = {
-        token: function(stream, state) {
-          let ch;
-          if (stream.match('{{')) {
-            // tslint:disable-next-line
-            while ((ch = stream.next()) != null) {
-              if (ch == '}' && stream.next() == '}') {
-                stream.eat('}');
-                return 'mustache';
-              }
-            }
-          }
-
-          while (stream.next() != null && !stream.match('{{', false)) {
-            // Read it but don't do anything
-          }
-
-          return null;
-        }
-      };
-
-      return CodeMirror.overlayMode(CodeMirror.getMode(config, parserConfig.backdrop || 'text/plain'), mustacheOverlay);
-    });
-  }
-
-  private parseMustache(): any[] {
-    this.validationErrors = [];
+    this.mustacheMode.define();
 
     //
-    // Help do an initial parse of the braces in the syntax
-    // Mustache does not currently do this in its parsing so
-    // we will do it instead.
-    // Populates the validationErrors collection to provide
-    // as clear validation detail as possible.
+    // Subscription to the validation event emitted when
+    // the editor has completed its validation. Since the
+    // editor's onChange event occurs before the validation
+    // it is possible to get the wrong state of validation
+    // errors. By letting the validation take control of when
+    // onChange is called then the correct errors are provided
+    // and the on change is kept up to date.
     //
-
-    let openSymbol:number = 0;
-    let closeSymbol: number = 0;
-    let reset: boolean = false;
-
-    for (var i = 0; i < this.templateContent.length; i++) {
-      if (reset) {
-        // Successfully parsed a symbol so reset for next
-        openSymbol = 0;
-        closeSymbol = 0;
-      }
-
-      const ch = this.templateContent.charAt(i);
-      if (ch === '{') {
-        if (closeSymbol > 0) {
-          // Found an open symbol before all close symbols
-          this.validationErrors.push(
-            this.i18NService.localize('integrations.steps.templater-illegal-open-symbol', [i]));
-          reset = true;
-          continue;
-        }
-
-        if (openSymbol >= 2) {
-          // Too many open symbols encountered
-          this.validationErrors.push(
-            this.i18NService.localize('integrations.steps.templater-too-many-open-symbols', [i]));
-          reset = true;
-          continue;
-        }
-
-        openSymbol++;
-
-      } else if (ch === '}') {
-        if (openSymbol < 2) {
-          // Found a close symbol before all the open symbols
-          this.validationErrors.push(
-            this.i18NService.localize('integrations.steps.templater-illegal-close-symbol', [i]));
-          reset = true;
-          continue;
-        }
-
-        if (closeSymbol >= 2) {
-          // Too many close symbols encountered
-          this.validationErrors.push(
-            this.i18NService.localize('integrations.steps.templater-too-many-close-symbols', [i]));
-          reset = true;
-          continue;
-        }
-
-        closeSymbol++;
-        continue;
-      } else {
-        if (openSymbol === 1) {
-          // Should have encountered another open symbol but not
-          this.validationErrors.push(
-            this.i18NService.localize('integrations.steps.templater-expected-open-symbol', [i]));
-          reset = true;
-          continue;
-        }
-
-        if (closeSymbol === 1) {
-          // Should have encountered another close symbol but not
-          this.validationErrors.push(
-            this.i18NService.localize('integrations.steps.templater-expected-close-symbol', [i]));
-          reset = true;
-          continue;
-        }
-      }
-
-      reset = openSymbol == 2 && closeSymbol == 2;
-    }
-
-    return Mustache.parse(this.templateContent);
+    this.mustacheMode.validationChanged$.subscribe(
+      errors => {
+        this.validationErrors = errors.slice(0);
+        this.onChange();
+      });
   }
 
   private extractTemplateSymbols(): any[] {
@@ -371,8 +275,7 @@ export class TemplaterComponent implements OnInit {
       return symbols;
     }
 
-    const tokens: any[] = this.parseMustache();
-
+    const tokens: any[] = Mustache.parse(this.templateContent);
     Mustache.clearCache();
     for (const token of tokens) {
       if (token[0] === 'text' || token[0] === '!') {
