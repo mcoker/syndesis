@@ -1,4 +1,5 @@
 import React from 'react';
+import './main.scss';
 
 export class Main extends React.Component {
 
@@ -18,6 +19,12 @@ export class Main extends React.Component {
               <br /> of it’s relative line height of 1.5.
             </p>
           </div>
+
+          <p className="pf-c-content">
+            <a href="#">link</a>
+            <br/>
+            <button className="pf-c-button pf-m-link">button</button>
+          </p>
         </section>
 
         <section className="pf-l-page__main-section">
